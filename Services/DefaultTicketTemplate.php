@@ -13,6 +13,9 @@ class DefaultTicketTemplate
 {
     /**
      * Constructor.
+     *
+     * @param DefaultTicketTemplateRepository $repository
+     * @param Templates                       $templates
      */
     public function __construct(
         private readonly DefaultTicketTemplateRepository $repository,
@@ -43,6 +46,8 @@ class DefaultTicketTemplate
     /**
      * Process new ticket by using default template setting.
      *
+     * @param TicketModel $ticket
+     *
      * @return void
      */
     public function processNewTicket(TicketModel $ticket): void
@@ -51,7 +56,7 @@ class DefaultTicketTemplate
         if (null != $projectId) {
             $relation = $this->repository->getRelationByProjectId($projectId);
 
-            if (count($relation) != 1) {
+            if (count($relation) !== 1) {
                 return;
             }
 

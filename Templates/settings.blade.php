@@ -6,7 +6,6 @@
         <h1>DefaultTicketTemplate Settings</h1>
     </x-global::pageheader>
 
-
     <div class="maincontent">
         <?php echo $tpl->displayNotification(); ?>
         <div class="maincontentinner">
@@ -14,7 +13,7 @@
                 Configure default ticket template on project
             </h4>
 
-            <form method="post" action="<?=BASE_URL ?>/DefaultTicketTemplate/settings">
+            <form method="post" action="<?php echo BASE_URL; ?>/DefaultTicketTemplate/settings">
                 <table class="table table-striped table-hover table-sm">
                     <thead>
                         <tr>
@@ -30,13 +29,16 @@
                                 </td>
                                 <td>
                                     <label>
+                                        @php
+                                            $default = $tpl->get('default')
+                                        @endphp
                                         <select name="{{$project['projectId']}}">
-                                            <option label="No default">No default</option>
+                                            <option label="{{ $default }}">{{ $default }}</option>
                                             @foreach($tpl->get('templates') as $template)
                                                 <option value="{{ $template['title']}}"
                                                 @if($project['templateName'] == $template['title'])
                                                     {{ 'selected' }}
-                                                    @endif
+                                                @endif
                                                 >{{ $template['title'] }}</option>
                                             @endforeach
                                         </select>

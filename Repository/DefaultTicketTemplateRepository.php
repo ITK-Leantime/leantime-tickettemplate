@@ -12,6 +12,8 @@ class DefaultTicketTemplateRepository
 {
     /**
      * Constructor.
+     *
+     * @param DbCore $db
      */
     public function __construct(private readonly DbCore $db)
     {
@@ -58,6 +60,9 @@ class DefaultTicketTemplateRepository
     /**
      * Add template project relation.
      *
+     * @param string $templateName
+     * @param int    $projectId
+     *
      * @return void
      */
     public function addTemplateProjectRelation(string $templateName, int $projectId): void
@@ -84,6 +89,9 @@ class DefaultTicketTemplateRepository
     /**
      * Handle template project relation.
      *
+     * @param ?string $templateName
+     * @param int     $projectId
+     *
      * @return void
      */
     public function handleTemplateProjectRelation(?string $templateName, int $projectId): void
@@ -107,6 +115,9 @@ class DefaultTicketTemplateRepository
 
     /**
      * Update template project relation.
+     *
+     * @param string $templateName
+     * @param int    $projectId
      *
      * @return void
      */
@@ -132,6 +143,8 @@ class DefaultTicketTemplateRepository
     /**
      * Delete template project relation.
      *
+     * @param int $projectId
+     *
      * @return void
      */
     public function deleteTemplateProjectRelation(int $projectId): void
@@ -153,6 +166,8 @@ class DefaultTicketTemplateRepository
 
     /**
      * Get template project relation by project id.
+     *
+     * @param int $projectId
      *
      * @return bool|array
      */
