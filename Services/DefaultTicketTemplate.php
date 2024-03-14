@@ -30,7 +30,7 @@ class DefaultTicketTemplate
      */
     public function install(): void
     {
-        $this->repository->setupTable();
+        $this->repository->setupTables();
     }
 
     /**
@@ -40,11 +40,11 @@ class DefaultTicketTemplate
      */
     public function uninstall(): void
     {
-        $this->repository->removeTable();
+        $this->repository->removeTables();
     }
 
     /**
-     * Process new ticket by using default template setting.
+     * Process new ticket by using ticket template setting.
      *
      * @param TicketModel $ticket
      *
@@ -53,6 +53,7 @@ class DefaultTicketTemplate
     public function processNewTicket(TicketModel $ticket): void
     {
         $projectId = $ticket->projectId ?? null;
+
         if (null != $projectId) {
             $relation = $this->repository->getRelationByProjectId($projectId);
 
@@ -60,15 +61,17 @@ class DefaultTicketTemplate
                 return;
             }
 
-            $templateTitle = reset($relation)['templateName'];
+            $templateId = reset($relation)['templateId'];
 
-            $templates = json_decode($this->templates->get([])->getContent(), true);
+            $templates = $this->repository->getTemplateById($templateId);
 
-            foreach ($templates as $template) {
-                if (($template['title'] ?? null) === $templateTitle && isset($template['content'])) {
-                    $ticket->description = $template['content'];
-                }
+            if (count($templates) !== 1) {
+                return;
             }
+
+            $template = reset($templates);
+
+            $ticket->description = $template['content'];
         }
     }
 }

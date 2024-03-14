@@ -3,22 +3,32 @@
 @section('content')
 
     <x-global::pageheader :icon="'fa fa-puzzle-piece'">
-        <h1>DefaultTicketTemplate Settings</h1>
+        <h1>{{ __("tickettemplate.settings.page_header") }}</h1>
     </x-global::pageheader>
 
     <div class="maincontent">
         <?php echo $tpl->displayNotification(); ?>
         <div class="maincontentinner">
-            <h4 class="widgettitle title-light"><span class="fa fa-cog"></span>
-                Configure default ticket template on project
-            </h4>
+
+            <div class="row" style="margin-left: 0; margin-right: 0;">
+                <div class="column">
+                    <h4 class="widgettitle title-light"><span class="fa fa-cog"></span>
+                        {{ __("tickettemplate.settings.widget_title") }}
+                    </h4>
+                </div>
+                <div class="column">
+                    <div class="" style="float:right;">
+                        <a href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-list"></i> {{ __('tickettemplate.list.action_list') }}</a>
+                    </div>
+                </div>
+            </div>
 
             <form method="post" action="<?php echo BASE_URL; ?>/DefaultTicketTemplate/settings">
                 <table class="table table-striped table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>Project</th>
-                            <th>Template</th>
+                            <th>{{__("label.project")}}</th>
+                            <th>{{__("tickettemplate.settings.template")}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,13 +40,13 @@
                                 <td>
                                     <label>
                                         @php
-                                            $default = $tpl->get('default')
+                                            $noDefaultTranslationKey = $tpl->get('noDefaultTranslationKey')
                                         @endphp
                                         <select name="{{$project['projectId']}}">
-                                            <option label="{{ $default }}">{{ $default }}</option>
+                                            <option label="{{ __($noDefaultTranslationKey)  }}">{{ $noDefaultTranslationKey }}</option>
                                             @foreach($tpl->get('templates') as $template)
-                                                <option value="{{ $template['title']}}"
-                                                @if($project['templateName'] == $template['title'])
+                                                <option value="{{ $template['id']}}"
+                                                @if($project['templateId'] == $template['id'])
                                                     {{ 'selected' }}
                                                 @endif
                                                 >{{ $template['title'] }}</option>
@@ -48,7 +58,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <input type="submit" value="Save" id="saveBtn" />
+                <input type="submit" value="{{ __('buttons.save') }}" id="saveBtn" />
             </form>
 
         </div>

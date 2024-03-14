@@ -24,15 +24,23 @@ class DefaultTicketTemplateRepository
      *
      * @return void
      */
-    public function setupTable(): void
+    public function setupTables(): void
     {
         $query = <<<SQL
-            CREATE TABLE `zp_relationtemplateproject` (
+            CREATE TABLE `zp_tickettemplate_relationtemplateproject` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `projectId` int(11) DEFAULT NULL,
-                `templateName` varchar(255) DEFAULT NULL,
+                `templateId` int(11) DEFAULT NULL,
                 PRIMARY KEY (`id`),
-                KEY zp_relationtemplateproject_projectId_index (`projectId`)
+                KEY zp_tickettemplate_relationtemplateproject_projectId_index (`projectId`),
+                KEY zp_tickettemplate_relationtemplateproject_templateId_index (`templateId`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+            CREATE TABLE `zp_tickettemplate_templates` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `title` varchar(255) NOT NULL,
+                `content` text NOT NULL,
+                PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
         SQL;
 
@@ -46,10 +54,11 @@ class DefaultTicketTemplateRepository
      *
      * @return void
      */
-    public function removeTable(): void
+    public function removeTables(): void
     {
         $query = <<<SQL
-            DROP TABLE `zp_relationtemplateproject`;
+            DROP TABLE `zp_tickettemplate_relationtemplateproject`;
+            DROP TABLE `zp_tickettemplate_templates`;
         SQL;
 
         $stmn = $this->db->database->prepare($query);
@@ -60,27 +69,27 @@ class DefaultTicketTemplateRepository
     /**
      * Add template project relation.
      *
-     * @param string $templateName
-     * @param int    $projectId
+     * @param int $templateId
+     * @param int $projectId
      *
      * @return void
      */
-    public function addTemplateProjectRelation(string $templateName, int $projectId): void
+    public function addTemplateProjectRelation(int $templateId, int $projectId): void
     {
         $sql = <<<SQL
-            INSERT INTO zp_relationtemplateproject (
+            INSERT INTO zp_tickettemplate_relationtemplateproject (
                 projectId,
-                templateName
+                templateId
             ) VALUES (
             	:projectId,
-            	:templateName
+            	:templateId
             );
         SQL;
 
         $stmn = $this->db->database->prepare($sql);
 
         $stmn->bindValue(':projectId', $projectId, PDO::PARAM_INT);
-        $stmn->bindValue(':templateName', $templateName);
+        $stmn->bindValue(':templateId', $templateId, PDO::PARAM_INT);
 
         $stmn->execute();
         $stmn->closeCursor();
@@ -89,16 +98,16 @@ class DefaultTicketTemplateRepository
     /**
      * Handle template project relation.
      *
-     * @param ?string $templateName
-     * @param int     $projectId
+     * @param ?int $templateId
+     * @param int  $projectId
      *
      * @return void
      */
-    public function handleTemplateProjectRelation(?string $templateName, int $projectId): void
+    public function handleTemplateProjectRelation(?int $templateId, int $projectId): void
     {
         $existingRelation = $this->getRelationByProjectId($projectId);
 
-        if (null === $templateName) {
+        if (null === $templateId) {
             // Handle removal of template project relation.
             if (!empty($existingRelation)) {
                 $this->deleteTemplateProjectRelation($projectId);
@@ -106,9 +115,9 @@ class DefaultTicketTemplateRepository
         } else {
             // Add/Update relation.
             if (empty($existingRelation)) {
-                $this->addTemplateProjectRelation($templateName, $projectId);
+                $this->addTemplateProjectRelation($templateId, $projectId);
             } else {
-                $this->updateTemplateProjectRelation($templateName, $projectId);
+                $this->updateTemplateProjectRelation($templateId, $projectId);
             }
         }
     }
@@ -116,17 +125,17 @@ class DefaultTicketTemplateRepository
     /**
      * Update template project relation.
      *
-     * @param string $templateName
-     * @param int    $projectId
+     * @param int $templateId
+     * @param int $projectId
      *
      * @return void
      */
-    public function updateTemplateProjectRelation(string $templateName, int $projectId): void
+    public function updateTemplateProjectRelation(int $templateId, int $projectId): void
     {
         $sql = <<<SQL
-            UPDATE zp_relationtemplateproject
+            UPDATE zp_tickettemplate_relationtemplateproject
             SET
-                templateName = :templateName
+                templateId = :templateId
             WHERE
                 projectId = :projectId;
         SQL;
@@ -134,7 +143,7 @@ class DefaultTicketTemplateRepository
         $stmn = $this->db->database->prepare($sql);
 
         $stmn->bindValue(':projectId', $projectId, PDO::PARAM_INT);
-        $stmn->bindValue(':templateName', $templateName);
+        $stmn->bindValue(':templateId', $templateId, PDO::PARAM_INT);
 
         $stmn->execute();
         $stmn->closeCursor();
@@ -151,7 +160,7 @@ class DefaultTicketTemplateRepository
     {
 
         $sql = <<<SQL
-            DELETE FROM zp_relationtemplateproject
+            DELETE FROM zp_tickettemplate_relationtemplateproject
             WHERE
                 projectId = :projectId;
         SQL;
@@ -177,7 +186,7 @@ class DefaultTicketTemplateRepository
         $sql = <<<SQL
             SELECT
                 *
-            FROM zp_relationtemplateproject
+            FROM zp_tickettemplate_relationtemplateproject
             WHERE
                 projectId = :projectId;
         SQL;
@@ -193,7 +202,7 @@ class DefaultTicketTemplateRepository
     }
 
     /**
-     * Get all available projects and their default ticket template.
+     * Get all available projects and their ticket template.
      *
      * @return bool|array
      */
@@ -203,10 +212,12 @@ class DefaultTicketTemplateRepository
             SELECT
                 zp_projects.id AS projectId,
                 zp_projects.name AS projectName,
-                zp_relationtemplateproject.templateName AS templateName
+                zp_tickettemplate_templates.id AS templateId
             FROM zp_projects
             LEFT JOIN
-                zp_relationtemplateproject ON zp_projects.id = zp_relationtemplateproject.projectId
+                zp_tickettemplate_relationtemplateproject ON zp_projects.id = zp_tickettemplate_relationtemplateproject.projectId
+            LEFT JOIN
+                zp_tickettemplate_templates ON zp_tickettemplate_relationtemplateproject.templateId = zp_tickettemplate_templates.id
             ORDER BY
                 projectName;
         SQL;
@@ -218,5 +229,156 @@ class DefaultTicketTemplateRepository
         $stmn->closeCursor();
 
         return $values;
+    }
+
+    /**
+     * Get all available templates.
+     *
+     * @return bool|array
+     */
+    public function getAllAvailableTemplates(): bool|array
+    {
+        $sql = <<<SQL
+            SELECT
+                zp_tickettemplate_templates.id AS id,
+                zp_tickettemplate_templates.title AS title
+            FROM zp_tickettemplate_templates
+            ORDER BY
+                title;
+        SQL;
+
+        $stmn = $this->db->database->prepare($sql);
+
+        $stmn->execute();
+        $values = $stmn->fetchAll();
+        $stmn->closeCursor();
+
+        return $values;
+    }
+
+    /**
+     * Add template.
+     *
+     * @param string $title
+     * @param string $content
+     *
+     * @return void
+     */
+    public function addTemplate(string $title, string $content): void
+    {
+        $sql = <<<SQL
+            INSERT INTO zp_tickettemplate_templates (
+                title,
+                content
+            ) VALUES (
+            	:title,
+            	:content
+            );
+        SQL;
+
+        $stmn = $this->db->database->prepare($sql);
+
+        $stmn->bindValue(':title', $title);
+        $stmn->bindValue(':content', $content);
+
+        $stmn->execute();
+        $stmn->closeCursor();
+    }
+
+    /**
+     * Get template by id.
+     *
+     * @param int $id
+     *
+     * @return bool|array
+     */
+    public function getTemplateById(int $id): bool|array
+    {
+        $sql = <<<SQL
+            SELECT
+                *
+            FROM zp_tickettemplate_templates
+            WHERE
+                id = :id;
+        SQL;
+
+        $stmn = $this->db->database->prepare($sql);
+
+        $stmn->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmn->execute();
+        $values = $stmn->fetchAll();
+        $stmn->closeCursor();
+
+        return $values;
+    }
+
+    /**
+     * Update template.
+     *
+     * @param int    $id
+     * @param string $title
+     * @param string $content
+     *
+     * @return void
+     */
+    public function updateTemplate(int $id, string $title, string $content): void
+    {
+        $sql = <<<SQL
+            UPDATE zp_tickettemplate_templates
+            SET
+                title = :title,
+                content = :content
+            WHERE
+                id = :id;
+        SQL;
+
+        $stmn = $this->db->database->prepare($sql);
+
+        $stmn->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmn->bindValue(':title', $title);
+        $stmn->bindValue(':content', $content);
+
+        $stmn->execute();
+        $stmn->closeCursor();
+    }
+
+    /**
+     * Delete template.
+     *
+     * @param int $id
+     *
+     * @return void
+     */
+    public function deleteTemplate(int $id): void
+    {
+        // Remove relations with template id
+        $sql = <<<SQL
+            DELETE FROM
+                zp_tickettemplate_relationtemplateproject
+            WHERE
+                zp_tickettemplate_relationtemplateproject.templateId = :id;
+        SQL;
+
+        $stmn = $this->db->database->prepare($sql);
+
+        $stmn->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $stmn->execute();
+        $stmn->closeCursor();
+
+        // Remove template
+        $sql = <<<SQL
+            DELETE FROM
+                zp_tickettemplate_templates
+            WHERE
+                zp_tickettemplate_templates.id = :id;
+        SQL;
+
+        $stmn = $this->db->database->prepare($sql);
+
+        $stmn->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $stmn->execute();
+        $stmn->closeCursor();
     }
 }

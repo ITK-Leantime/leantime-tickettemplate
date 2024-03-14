@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Settings extends Controller
 {
-    public const NO_DEFAULT = 'No default';
+    public const NO_DEFAULT_TRANSLATION_KEY = 'tickettemplate.settings.no_default';
 
     /**
      * Get method.
@@ -26,23 +26,19 @@ class Settings extends Controller
      */
     public function get(): Response
     {
+        // Currently, translations are read before the plugin register is handled,
+        // resulting in plugin translations not being considered,
+        // without an extra call to readIni().
+        $this->language->readIni();
+
         $defaultTicketTemplateRepository = app()->make(DefaultTicketTemplateRepository::class);
         $projects = $defaultTicketTemplateRepository->getAllAvailableProjects();
 
-        $templateController = app()->make(Templates::class);
-        $templates = json_decode($templateController->get([])->getContent(), true);
-
-        // Remove unnecessary data, only 'title' is used later.
-        $templates = array_map(function ($template) {
-            unset($template['description']);
-            unset($template['content']);
-            unset($template['category']);
-            return $template;
-        }, $templates);
+        $templates = $defaultTicketTemplateRepository->getAllAvailableTemplates();
 
         $this->tpl->assign('projects', $projects);
         $this->tpl->assign('templates', $templates);
-        $this->tpl->assign('default', self::NO_DEFAULT);
+        $this->tpl->assign('noDefaultTranslationKey', self::NO_DEFAULT_TRANSLATION_KEY);
 
         return $this->tpl->display('defaultTicketTemplate.settings');
     }
@@ -63,18 +59,18 @@ class Settings extends Controller
         // Also note that the default 'max_input_vars' is 1000,
         // hence this will fail if more than 1000 projects exists.
         if (count($projects) != count($params)) {
-            $this->tpl->setNotification('Failed saving settings.', 'error');
+            $this->tpl->setNotification($this->language->__('tickettemplate.settings.failed_message'), 'error');
         } else {
             // Do the updating if change detected.
             foreach ($projects as $project) {
                 $projectId = $project['projectId'];
-                $compareValue = $params[$projectId] === self::NO_DEFAULT ? null : $params[$projectId];
-                if ($project['templateName'] != $compareValue) {
+                $compareValue = $params[$projectId] === self::NO_DEFAULT_TRANSLATION_KEY ? null : $params[$projectId];
+                if ($project['templateId'] != $compareValue) {
                     $defaultTicketTemplateRepository->handleTemplateProjectRelation($compareValue, $projectId);
                 }
             }
 
-            $this->tpl->setNotification('The settings were successfully saved.', 'success');
+            $this->tpl->setNotification($this->language->__('tickettemplate.settings.success_message'), 'success');
         }
 
         return Frontcontroller::redirect(BASE_URL . '/DefaultTicketTemplate/settings');
