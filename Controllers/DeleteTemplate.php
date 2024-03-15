@@ -24,11 +24,6 @@ class DeleteTemplate extends Controller
      */
     public function run(): Response
     {
-        // Currently, translations are read before the plugin register is handled,
-        // resulting in plugin translations not being considered,
-        // without an extra call to readIni().
-        $this->language->readIni();
-
         Auth::authOrRedirect([Roles::$owner, Roles::$admin], true);
 
         $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);

@@ -3,6 +3,8 @@
 namespace Leantime\Plugins\TicketTemplate\Controllers;
 
 use Leantime\Core\Controller;
+use Leantime\Domain\Auth\Models\Roles;
+use Leantime\Domain\Auth\Services\Auth;
 use Leantime\Plugins\TicketTemplate\Repository\TicketTemplateRepository;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,10 +23,7 @@ class ListTemplates extends Controller
      */
     public function get(): Response
     {
-        // Currently, translations are read before the plugin register is handled,
-        // resulting in plugin translations not being considered,
-        // without an extra call to readIni().
-        $this->language->readIni();
+        Auth::authOrRedirect([Roles::$owner, Roles::$admin], true);
 
         $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
         $templates = $ticketTemplateRepository->getAllAvailableTemplates();

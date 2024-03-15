@@ -26,6 +26,11 @@ Go to plugin settings (`/TicketTemplate/settings`),
 which requires at least administrator (40) role,
 to configure ticket templates.
 
+**Note**: Currently, translations are read before the plugin register is handled,
+resulting in plugin translations not being considered.
+Go to Settings (`/users/editOwn#settings`) and save to refresh
+plugin translations. 
+
 ## Development
 
 ### Coding standards

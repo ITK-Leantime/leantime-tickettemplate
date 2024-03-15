@@ -25,11 +25,11 @@
             <form method="post" action="<?php echo BASE_URL; ?>/TicketTemplate/createTemplate">
                 <div>
                     <label for="title">
-                        {{__('tickettemplate.create.template_title')}}
+                        {{ __('tickettemplate.create.template_title') }}
                     </label>
                     <input type="text" id="title" name="title" required/> <br>
                     <label for="content">
-                        {{__('tickettemplate.create.template_content')}}
+                        {{ __('tickettemplate.create.template_content') }}
                     </label>
                     <textarea name="content" id="content" style="height: 220px; width: 1000px;" required></textarea> <br>
                     <input type="submit" value="{{ __('buttons.save') }}" id="saveBtn" />

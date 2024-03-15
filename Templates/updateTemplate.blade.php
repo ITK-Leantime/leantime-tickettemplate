@@ -27,12 +27,12 @@
                     <input type="hidden" id="id" name="id" value="<?php echo $tpl->get('template')['id']; ?>" required/> <br>
 
                     <label for="title">
-                        {{__('tickettemplate.create.template_title')}}
+                        {{ __('tickettemplate.create.template_title') }}
                     </label>
                     <input type="text" id="title" name="title" value="<?php echo $tpl->get('template')['title']; ?>" required/> <br>
 
                     <label for="content">
-                        {{__('tickettemplate.create.template_content')}}
+                        {{ __('tickettemplate.create.template_content') }}
                     </label>
                     <textarea name="content" id="content" style="height: 220px; width: 1000px;" required><?php echo $tpl->get('template')['content']; ?></textarea> <br>
 

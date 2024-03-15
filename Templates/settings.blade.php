@@ -27,8 +27,8 @@
                 <table class="table table-striped table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>{{__("label.project")}}</th>
-                            <th>{{__("tickettemplate.settings.template")}}</th>
+                            <th>{{ __("label.project") }}</th>
+                            <th>{{ __("tickettemplate.settings.template") }}</th>
                         </tr>
                     </thead>
                     <tbody>
