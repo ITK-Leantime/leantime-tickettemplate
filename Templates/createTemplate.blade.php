@@ -17,12 +17,12 @@
                 </div>
                 <div class="column">
                     <div class="" style="float:right;">
-                        <a href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-xmark"></i> {{ __('buttons.cancel') }}</a>
+                        <a href="<?php echo BASE_URL; ?>/TicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-xmark"></i> {{ __('buttons.cancel') }}</a>
                     </div>
                 </div>
             </div>
 
-            <form method="post" action="<?php echo BASE_URL; ?>/DefaultTicketTemplate/createTemplate">
+            <form method="post" action="<?php echo BASE_URL; ?>/TicketTemplate/createTemplate">
                 <div>
                     <label for="title">
                         {{__('tickettemplate.create.template_title')}}
@@ -32,7 +32,6 @@
                         {{__('tickettemplate.create.template_content')}}
                     </label>
                     <textarea name="content" id="content" style="height: 220px; width: 1000px;" required></textarea> <br>
-
                     <input type="submit" value="{{ __('buttons.save') }}" id="saveBtn" />
                 </div>
             </form>

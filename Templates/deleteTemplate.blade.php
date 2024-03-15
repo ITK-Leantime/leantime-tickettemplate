@@ -16,7 +16,7 @@
                 <form method="post">
                     <p>{{ __('tickettemplate.delete.confirm') }}</p><br />
                     <input type="submit" value="{{ __('buttons.yes_delete') }}" name="del" class="button" />
-                    <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/listTemplates">{{ __('buttons.back') }}</a>
+                    <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/TicketTemplate/listTemplates">{{ __('buttons.back') }}</a>
                 </form>
             </div>
         </div>

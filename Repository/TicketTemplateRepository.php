@@ -1,14 +1,14 @@
 <?php
 
-namespace Leantime\Plugins\DefaultTicketTemplate\Repository;
+namespace Leantime\Plugins\TicketTemplate\Repository;
 
 use Leantime\Core\Db as DbCore;
 use PDO;
 
 /**
- * Default ticket template repository class.
+ * Ticket template repository class.
  */
-class DefaultTicketTemplateRepository
+class TicketTemplateRepository
 {
     /**
      * Constructor.

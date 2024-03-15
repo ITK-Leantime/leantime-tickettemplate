@@ -17,12 +17,12 @@
                 </div>
                 <div class="column">
                     <div class="" style="float:right;">
-                        <a href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-xmark"></i> {{ __('buttons.cancel') }}</a>
+                        <a href="<?php echo BASE_URL; ?>/TicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-xmark"></i> {{ __('buttons.cancel') }}</a>
                     </div>
                 </div>
             </div>
 
-            <form method="post" action="<?php echo BASE_URL; ?>/DefaultTicketTemplate/updateTemplate/<?php echo $tpl->get('template')['id']; ?>">
+            <form method="post" action="<?php echo BASE_URL; ?>/TicketTemplate/updateTemplate/<?php echo $tpl->get('template')['id']; ?>">
                 <div>
                     <input type="hidden" id="id" name="id" value="<?php echo $tpl->get('template')['id']; ?>" required/> <br>
 

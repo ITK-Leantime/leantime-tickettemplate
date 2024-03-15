@@ -1,6 +1,6 @@
 {
-    "name": "leantime/default-ticket-template",
-    "description": "Allows settings default ticket template on projects",
+    "name": "leantime/ticket-template",
+    "description": "Allows setting ticket template on projects",
     "version": "0.0",
     "screenshot": "",
     "authors": [
@@ -11,7 +11,7 @@
     ],
     "type": "leantime-plugin",
     "license": "MIT",
-    "homepage": "https://github.com/ITK-leantime/leantime",
+    "homepage": "https://github.com/ITK-Leantime/leantime-tickettemplate",
     "require": {
         "leantime/leantime": "^3.0"
     },

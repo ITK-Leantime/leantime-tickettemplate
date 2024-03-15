@@ -1,15 +1,15 @@
 <?php
 
-namespace Leantime\Plugins\DefaultTicketTemplate\Controllers;
+namespace Leantime\Plugins\TicketTemplate\Controllers;
 
 use Leantime\Core\Controller;
 use Leantime\Core\Frontcontroller;
-use Leantime\Plugins\DefaultTicketTemplate\Repository\DefaultTicketTemplateRepository;
+use Leantime\Plugins\TicketTemplate\Repository\TicketTemplateRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Create template Controller for DefaultTicketTemplate plugin
+ * Create template Controller for TicketTemplate plugin
  *
  * @package    leantime
  * @subpackage plugins
@@ -36,8 +36,8 @@ class UpdateTemplate extends Controller
 
         $id = $params['id'];
 
-        $defaultTicketTemplateRepository = app()->make(DefaultTicketTemplateRepository::class);
-        $templates = $defaultTicketTemplateRepository->getTemplateById($id);
+        $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
+        $templates = $ticketTemplateRepository->getTemplateById($id);
 
         if (count($templates) !== 1) {
             return $this->tpl->display('errors.error403', responseCode: 403);
@@ -47,7 +47,7 @@ class UpdateTemplate extends Controller
 
         $this->tpl->assign('template', $template);
 
-        return $this->tpl->display('defaultTicketTemplate.updateTemplate');
+        return $this->tpl->display('ticketTemplate.updateTemplate');
     }
 
     /**
@@ -60,14 +60,14 @@ class UpdateTemplate extends Controller
     public function post(array $params): RedirectResponse
     {
         if (isset($params['title']) && isset($params['content']) && isset($params['id'])) {
-            $defaultTicketTemplateRepository = app()->make(DefaultTicketTemplateRepository::class);
-            $defaultTicketTemplateRepository->updateTemplate($params['id'], $params['title'], $params['content']);
+            $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
+            $ticketTemplateRepository->updateTemplate($params['id'], $params['title'], $params['content']);
 
             $this->tpl->setNotification($this->language->__('tickettemplate.update.success_message'), 'success');
         } else {
             $this->tpl->setNotification($this->language->__('tickettemplate.update.failed_message'), 'error');
         }
 
-        return Frontcontroller::redirect(BASE_URL . '/DefaultTicketTemplate/listTemplates');
+        return Frontcontroller::redirect(BASE_URL . '/TicketTemplate/listTemplates');
     }
 }

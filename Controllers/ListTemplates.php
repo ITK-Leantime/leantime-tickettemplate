@@ -1,13 +1,13 @@
 <?php
 
-namespace Leantime\Plugins\DefaultTicketTemplate\Controllers;
+namespace Leantime\Plugins\TicketTemplate\Controllers;
 
 use Leantime\Core\Controller;
-use Leantime\Plugins\DefaultTicketTemplate\Repository\DefaultTicketTemplateRepository;
+use Leantime\Plugins\TicketTemplate\Repository\TicketTemplateRepository;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * List templates Controller for DefaultTicketTemplate plugin
+ * List templates Controller for TicketTemplate plugin
  *
  * @package    leantime
  * @subpackage plugins
@@ -26,11 +26,11 @@ class ListTemplates extends Controller
         // without an extra call to readIni().
         $this->language->readIni();
 
-        $defaultTicketTemplateRepository = app()->make(DefaultTicketTemplateRepository::class);
-        $templates = $defaultTicketTemplateRepository->getAllAvailableTemplates();
+        $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
+        $templates = $ticketTemplateRepository->getAllAvailableTemplates();
 
         $this->tpl->assign('templates', $templates);
 
-        return $this->tpl->display('defaultTicketTemplate.listTemplates');
+        return $this->tpl->display('ticketTemplate.listTemplates');
     }
 }

@@ -18,12 +18,12 @@
                 </div>
                 <div class="column">
                     <div class="" style="float:right;">
-                        <a href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-list"></i> {{ __('tickettemplate.list.action_list') }}</a>
+                        <a href="<?php echo BASE_URL; ?>/TicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-list"></i> {{ __('tickettemplate.list.action_list') }}</a>
                     </div>
                 </div>
             </div>
 
-            <form method="post" action="<?php echo BASE_URL; ?>/DefaultTicketTemplate/settings">
+            <form method="post" action="<?php echo BASE_URL; ?>/TicketTemplate/settings">
                 <table class="table table-striped table-hover table-sm">
                     <thead>
                         <tr>

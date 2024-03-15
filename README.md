@@ -1,30 +1,30 @@
-# Leantime Default Ticket Template
+# Leantime Ticket Template
 
-Allows administrators to configure a default ticket template per project.
+Allows administrators to create and configure a ticket templates per project.
 
 ## Installation
 
 Clone this repository into your Leantime plugin folder:
 
 ``` shell
-git clone https://github.com/ITK-Leantime/leantime-defaulttickettemplate.git app/Plugins/DefaultTicketTemplate
+git clone https://github.com/ITK-Leantime/leantime-tickettemplate.git app/Plugins/TicketTemplate
 ```
 
 Install and enable the plugin:
 
 ``` shell
-bin/leantime plugin:install leantime/default-ticket-template
-bin/leantime plugin:enable leantime/default-ticket-template
+bin/leantime plugin:install leantime/ticket-template
+bin/leantime plugin:enable leantime/ticket-template
 ```
 
 Alternatively, navigate to `/plugins/myapps` and activate the
-`leantime/default-ticket-template` plugin.
+`leantime/ticket-template` plugin.
 
 ## Usage
 
-Go to plugin settings (`/DefaultTicketTemplate/settings`),
+Go to plugin settings (`/TicketTemplate/settings`),
 which requires at least administrator (40) role,
-to configure default templates.
+to configure ticket templates.
 
 ## Development
 

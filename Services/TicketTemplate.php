@@ -1,25 +1,22 @@
 <?php
 
-namespace Leantime\Plugins\DefaultTicketTemplate\Services;
+namespace Leantime\Plugins\TicketTemplate\Services;
 
 use Leantime\Domain\Tickets\Models\Tickets as TicketModel;
-use Leantime\Domain\Wiki\Controllers\Templates;
-use Leantime\Plugins\DefaultTicketTemplate\Repository\DefaultTicketTemplateRepository;
+use Leantime\Plugins\TicketTemplate\Repository\TicketTemplateRepository;
 
 /**
- * Default Ticket Template service.
+ * Ticket Template service.
  */
-class DefaultTicketTemplate
+class TicketTemplate
 {
     /**
      * Constructor.
      *
-     * @param DefaultTicketTemplateRepository $repository
-     * @param Templates                       $templates
+     * @param TicketTemplateRepository $repository
      */
     public function __construct(
-        private readonly DefaultTicketTemplateRepository $repository,
-        private readonly Templates $templates,
+        private readonly TicketTemplateRepository $repository,
     ) {
     }
 

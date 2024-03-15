@@ -1,16 +1,15 @@
 <?php
 
-namespace Leantime\Plugins\DefaultTicketTemplate\Controllers;
+namespace Leantime\Plugins\TicketTemplate\Controllers;
 
 use Leantime\Core\Controller;
 use Leantime\Core\Frontcontroller;
-use Leantime\Domain\Wiki\Controllers\Templates;
-use Leantime\Plugins\DefaultTicketTemplate\Repository\DefaultTicketTemplateRepository;
+use Leantime\Plugins\TicketTemplate\Repository\TicketTemplateRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Settings Controller for DefaultTicketTemplate plugin
+ * Settings Controller for TicketTemplate plugin
  *
  * @package    leantime
  * @subpackage plugins
@@ -31,7 +30,7 @@ class Settings extends Controller
         // without an extra call to readIni().
         $this->language->readIni();
 
-        $defaultTicketTemplateRepository = app()->make(DefaultTicketTemplateRepository::class);
+        $defaultTicketTemplateRepository = app()->make(TicketTemplateRepository::class);
         $projects = $defaultTicketTemplateRepository->getAllAvailableProjects();
 
         $templates = $defaultTicketTemplateRepository->getAllAvailableTemplates();
@@ -40,7 +39,7 @@ class Settings extends Controller
         $this->tpl->assign('templates', $templates);
         $this->tpl->assign('noDefaultTranslationKey', self::NO_DEFAULT_TRANSLATION_KEY);
 
-        return $this->tpl->display('defaultTicketTemplate.settings');
+        return $this->tpl->display('ticketTemplate.settings');
     }
 
     /**
@@ -52,8 +51,8 @@ class Settings extends Controller
      */
     public function post(array $params): RedirectResponse
     {
-        $defaultTicketTemplateRepository = app()->make(DefaultTicketTemplateRepository::class);
-        $projects = $defaultTicketTemplateRepository->getAllAvailableProjects();
+        $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
+        $projects = $ticketTemplateRepository->getAllAvailableProjects();
 
         // We should receive a param per project.
         // Also note that the default 'max_input_vars' is 1000,
@@ -66,13 +65,13 @@ class Settings extends Controller
                 $projectId = $project['projectId'];
                 $compareValue = $params[$projectId] === self::NO_DEFAULT_TRANSLATION_KEY ? null : $params[$projectId];
                 if ($project['templateId'] != $compareValue) {
-                    $defaultTicketTemplateRepository->handleTemplateProjectRelation($compareValue, $projectId);
+                    $ticketTemplateRepository->handleTemplateProjectRelation($compareValue, $projectId);
                 }
             }
 
             $this->tpl->setNotification($this->language->__('tickettemplate.settings.success_message'), 'success');
         }
 
-        return Frontcontroller::redirect(BASE_URL . '/DefaultTicketTemplate/settings');
+        return Frontcontroller::redirect(BASE_URL . '/TicketTemplate/settings');
     }
 }

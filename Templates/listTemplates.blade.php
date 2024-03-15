@@ -17,8 +17,8 @@
                 </div>
                 <div class="column">
                     <div class="" style="float:right;">
-                        <a href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/createTemplate" class="btn btn-primary"><i class="fa-solid fa-plus"></i> {{ __('tickettemplate.create.action_create') }}</a>
-                        <a href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/settings" class="btn btn-primary"><i class="fa-solid fa-gears"></i> {{ __('tickettemplate.settings.action_settings') }}</a>
+                        <a href="<?php echo BASE_URL; ?>/TicketTemplate/createTemplate" class="btn btn-primary"><i class="fa-solid fa-plus"></i> {{ __('tickettemplate.create.action_create') }}</a>
+                        <a href="<?php echo BASE_URL; ?>/TicketTemplate/settings" class="btn btn-primary"><i class="fa-solid fa-gears"></i> {{ __('tickettemplate.settings.action_settings') }}</a>
                     </div>
                 </div>
             </div>
@@ -37,8 +37,8 @@
                                 {{ $template['title'] }}
                             </td>
                             <td style="text-align: right;">
-                                <a href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/updateTemplate/{{ $template['id'] }}" class="btn btn-primary"><i class="fa-solid fa-pen"></i> {{ __('tickettemplate.list.action_update') }}</a>
-                                <a href="<?php echo BASE_URL; ?>/DefaultTicketTemplate/deleteTemplate/{{ $template['id'] }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> {{ __('buttons.delete') }}</a>
+                                <a href="<?php echo BASE_URL; ?>/TicketTemplate/updateTemplate/{{ $template['id'] }}" class="btn btn-primary"><i class="fa-solid fa-pen"></i> {{ __('tickettemplate.list.action_update') }}</a>
+                                <a href="<?php echo BASE_URL; ?>/TicketTemplate/deleteTemplate/{{ $template['id'] }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> {{ __('buttons.delete') }}</a>
                             </td>
                         </tr>
                     @endforeach
