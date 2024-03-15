@@ -29,7 +29,7 @@ to configure ticket templates.
 **Note**: Currently, translations are read before the plugin register is handled,
 resulting in plugin translations not being considered.
 Go to Settings (`/users/editOwn#settings`) and save to refresh
-plugin translations. 
+plugin translations.
 
 ## Development
 
@@ -38,4 +38,9 @@ plugin translations.
 ``` shell
 docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.1-fpm:latest composer install
 docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.1-fpm:latest composer coding-standards-check
+```
+
+```shell
+docker run --tty --interactive --rm --volume ${PWD}:/app node:20 yarn --cwd /app install
+docker run --tty --interactive --rm --volume ${PWD}:/app node:20 yarn --cwd /app coding-standards-check
 ```
