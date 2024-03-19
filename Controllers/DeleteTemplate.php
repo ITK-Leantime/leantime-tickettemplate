@@ -28,8 +28,8 @@ class DeleteTemplate extends Controller
 
         $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
 
-        if (isset($_GET['id']) === true) {
-            $id = (int) ($_GET['id']);
+        if (isset($_GET['id'])) {
+            $id = (int) $_GET['id'];
 
             if (isset($_POST['del']) === true) {
                 $ticketTemplateRepository->deleteTemplate($id);
@@ -42,7 +42,7 @@ class DeleteTemplate extends Controller
             //Assign template.
             $template = $ticketTemplateRepository->getTemplateById($id);
 
-            if ($template === false) {
+            if (!$template) {
                 return $this->tpl->display('errors.error403', responseCode: 403);
             }
 

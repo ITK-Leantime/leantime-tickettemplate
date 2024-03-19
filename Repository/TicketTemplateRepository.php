@@ -15,8 +15,9 @@ class TicketTemplateRepository
      *
      * @param DbCore $db
      */
-    public function __construct(private readonly DbCore $db)
-    {
+    public function __construct(
+        private readonly DbCore $db
+    ) {
     }
 
     /**
