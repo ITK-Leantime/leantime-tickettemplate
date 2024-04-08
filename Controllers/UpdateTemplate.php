@@ -62,9 +62,9 @@ class UpdateTemplate extends Controller
             $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
             $ticketTemplateRepository->updateTemplate($params['id'], $params['title'], $params['content']);
 
-            $this->tpl->setNotification($this->language->__('tickettemplate.update.success_message'), 'success');
+            $this->tpl->setNotification('Successfully updated template', 'success');
         } else {
-            $this->tpl->setNotification($this->language->__('tickettemplate.update.failed_message'), 'error');
+            $this->tpl->setNotification('Failed updating template', 'error');
         }
 
         return Frontcontroller::redirect(BASE_URL . '/TicketTemplate/listTemplates');

@@ -3,7 +3,7 @@
 @section('content')
 
     <x-global::pageheader :icon="'fa fa-puzzle-piece'">
-        <h1>{{ __("tickettemplate.settings.page_header") }}</h1>
+        <h1>TicketTemplate: Settings</h1>
     </x-global::pageheader>
 
     <div class="maincontent">
@@ -13,12 +13,12 @@
             <div class="row" style="margin-left: 0; margin-right: 0;">
                 <div class="column">
                     <h4 class="widgettitle title-light"><span class="fa fa-cog"></span>
-                        {{ __("tickettemplate.settings.widget_title") }}
+                        Project template settings
                     </h4>
                 </div>
                 <div class="column">
                     <div class="" style="float:right;">
-                        <a href="<?php echo BASE_URL; ?>/TicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-list"></i> {{ __('tickettemplate.list.action_list') }}</a>
+                        <a href="<?php echo BASE_URL; ?>/TicketTemplate/listTemplates" class="btn btn-primary"><i class="fa-solid fa-list"></i> Templates</a>
                     </div>
                 </div>
             </div>
@@ -27,8 +27,8 @@
                 <table class="table table-striped table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>{{ __("label.project") }}</th>
-                            <th>{{ __("tickettemplate.settings.template") }}</th>
+                            <th>Project</th>
+                            <th>Template</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,10 +40,10 @@
                                 <td>
                                     <label>
                                         @php
-                                            $noDefaultTranslationKey = $tpl->get('noDefaultTranslationKey')
+                                            $noDefault = $tpl->get('noDefault')
                                         @endphp
                                         <select name="{{$project['projectId']}}">
-                                            <option label="{{ __($noDefaultTranslationKey)  }}">{{ $noDefaultTranslationKey }}</option>
+                                            <option label="{{ $noDefault }}">{{ $noDefault }}</option>
                                             @foreach($tpl->get('templates') as $template)
                                                 <option value="{{ $template['id']}}"
                                                 @if($project['templateId'] == $template['id'])
@@ -58,7 +58,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <input type="submit" value="{{ __('buttons.save') }}" id="saveBtn" />
+                <input type="submit" value="Save" id="saveBtn" />
             </form>
 
         </div>

@@ -34,7 +34,7 @@ class DeleteTemplate extends Controller
             if (isset($_POST['del']) === true) {
                 $ticketTemplateRepository->deleteTemplate($id);
 
-                $this->tpl->setNotification($this->language->__('tickettemplate.delete.success_message'), "success");
+                $this->tpl->setNotification('Template deleted successfully', "success");
 
                 return Frontcontroller::redirect(BASE_URL . "/TicketTemplate/listTemplates");
             }

@@ -45,9 +45,9 @@ class CreateTemplate extends Controller
             $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
             $ticketTemplateRepository->addTemplate($params['title'], $params['content']);
 
-            $this->tpl->setNotification($this->language->__('tickettemplate.create.success_message'), 'success');
+            $this->tpl->setNotification('Successfully created template', 'success');
         } else {
-            $this->tpl->setNotification($this->language->__('tickettemplate.create.failed_message'), 'error');
+            $this->tpl->setNotification('Failed creating template', 'error');
         }
 
         return Frontcontroller::redirect(BASE_URL . '/TicketTemplate/listTemplates');
