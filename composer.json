@@ -1,7 +1,6 @@
 {
     "name": "leantime/ticket-template",
     "description": "Allows setting ticket template on projects",
-    "version": "0.0",
     "screenshot": "",
     "authors": [
         {
