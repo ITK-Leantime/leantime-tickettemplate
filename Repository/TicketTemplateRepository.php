@@ -2,7 +2,7 @@
 
 namespace Leantime\Plugins\TicketTemplate\Repository;
 
-use Leantime\Core\Db as DbCore;
+use Leantime\Core\Db\Db as DbCore;
 use PDO;
 
 /**
