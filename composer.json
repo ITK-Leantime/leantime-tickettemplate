@@ -29,7 +29,8 @@
         "allow-plugins": {
             "metasyntactical/composer-plugin-license-check": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "ergebnis/composer-normalize": true
         }
     },
     "scripts": {
@@ -57,5 +58,8 @@
           "type": "composer",
           "url": "https://rimi-itk.github.io/composer/"
         }
-      ]
+      ],
+    "require": {
+        "ergebnis/composer-normalize": "^2.43"
+    }
 }
