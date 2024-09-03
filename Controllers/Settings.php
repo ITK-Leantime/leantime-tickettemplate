@@ -44,7 +44,7 @@ class Settings extends Controller
     /**
      * Post method.
      *
-     * @param array $params
+     * @param array<string, mixed> $params
      *
      * @return RedirectResponse
      */

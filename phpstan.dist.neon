@@ -6,6 +6,7 @@ parameters:
     excludePaths:
         - vendor
         - node_modules
+        - *.blade.php
 
     ignoreErrors:
         - '#Constant (APP_ROOT|BASE_URL) not found.#'

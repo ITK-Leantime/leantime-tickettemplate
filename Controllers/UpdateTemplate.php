@@ -21,7 +21,7 @@ class UpdateTemplate extends Controller
     /**
      * Get method.
      *
-     * @param array $params
+     * @param array<string, mixed> $params
      *
      * @return Response
      */
@@ -50,7 +50,7 @@ class UpdateTemplate extends Controller
     /**
      * Post method.
      *
-     * @param array $params
+     * @param array<string, mixed> $params
      *
      * @return RedirectResponse
      */

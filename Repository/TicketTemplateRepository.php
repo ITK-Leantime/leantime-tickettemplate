@@ -179,7 +179,7 @@ class TicketTemplateRepository
      *
      * @param int $projectId
      *
-     * @return bool|array
+     * @return bool|array<string, mixed>
      */
     public function getRelationByProjectId(int $projectId): bool|array
     {
@@ -205,7 +205,7 @@ class TicketTemplateRepository
     /**
      * Get all available projects and their ticket template.
      *
-     * @return bool|array
+     * @return bool|array<string, mixed>
      */
     public function getAllAvailableProjects(): bool|array
     {
@@ -235,7 +235,7 @@ class TicketTemplateRepository
     /**
      * Get all available templates.
      *
-     * @return bool|array
+     * @return bool|array<string, mixed>
      */
     public function getAllAvailableTemplates(): bool|array
     {
@@ -291,7 +291,7 @@ class TicketTemplateRepository
      *
      * @param int $id
      *
-     * @return bool|array
+     * @return bool|array<string, mixed>
      */
     public function getTemplateById(int $id): bool|array
     {
