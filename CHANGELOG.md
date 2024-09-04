@@ -7,4 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Added TicketTemplate plugin.
+* [PR-3](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/3)
+  * Make plugin comply with leantime 3.2.0
+  * Update import paths
+  * Add additional actions to pr.yml
+  * Streamline codeanalysis and linting with other plugins
+  * Update leantime in composer file and add composer.lock
+
+* [PR-2](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/2)
+  * Remove translations
+
+* [PR-1](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/1)
+  * Initial plugin that adds ability to configure a default ticket template per project

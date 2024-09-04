@@ -1,0 +1,17 @@
+parameters:
+    level: 6
+    paths:
+        - .
+
+    excludePaths:
+        - vendor
+        - node_modules
+        - *.blade.php
+
+    ignoreErrors:
+        - '#Constant (APP_ROOT|BASE_URL) not found.#'
+        # - identifier: missingType.generics
+
+# Local Variables:
+# mode: yaml
+# End:

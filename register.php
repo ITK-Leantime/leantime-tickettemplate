@@ -1,7 +1,6 @@
 <?php
 
-use Leantime\Core\Application;
-use Leantime\Core\Events;
+use Leantime\Core\Bootstrap\Application;
 use Leantime\Domain\Tickets\Models\Tickets;
 use Leantime\Plugins\TicketTemplate\Services\TicketTemplate;
 

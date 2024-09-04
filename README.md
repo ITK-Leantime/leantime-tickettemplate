@@ -31,11 +31,19 @@ to configure ticket templates.
 ### Coding standards
 
 ``` shell
-docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.1-fpm:latest composer install
-docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.1-fpm:latest composer coding-standards-check
+docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer install
+docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer coding-standards-apply
+docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer coding-standards-check
 ```
 
 ```shell
-docker run --tty --interactive --rm --volume ${PWD}:/app node:20 yarn --cwd /app install
-docker run --tty --interactive --rm --volume ${PWD}:/app node:20 yarn --cwd /app coding-standards-check
+docker run --rm --volume $PWD:/md peterdavehello/markdownlint markdownlint --ignore vendor --ignore node_modules --ignore LICENSE.md '**/*.md' --fix
+docker run --rm --volume $PWD:/md peterdavehello/markdownlint markdownlint --ignore vendor --ignore node_modules --ignore LICENSE.md '**/*.md'
+```
+
+### Code analysis
+
+```shell
+docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer install
+docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer code-analysis
 ```
