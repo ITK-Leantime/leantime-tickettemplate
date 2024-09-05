@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+* [PR-4](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/4)
+  * Remove composer.lock
+  * Add IF NOT EXISTS to sql table setup
+
 * [PR-3](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/3)
   * Make plugin comply with leantime 3.2.0
   * Update import paths

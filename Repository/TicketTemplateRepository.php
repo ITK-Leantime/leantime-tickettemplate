@@ -28,7 +28,7 @@ class TicketTemplateRepository
     public function setupTables(): void
     {
         $query = <<<SQL
-            CREATE TABLE `zp_tickettemplate_relationtemplateproject` (
+            CREATE TABLE IF NOT EXISTS `zp_tickettemplate_relationtemplateproject` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `projectId` int(11) DEFAULT NULL,
                 `templateId` int(11) DEFAULT NULL,
@@ -37,7 +37,7 @@ class TicketTemplateRepository
                 KEY zp_tickettemplate_relationtemplateproject_templateId_index (`templateId`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-            CREATE TABLE `zp_tickettemplate_templates` (
+            CREATE TABLE IF NOT EXISTS `zp_tickettemplate_templates` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `title` varchar(255) NOT NULL,
                 `content` text NOT NULL,
