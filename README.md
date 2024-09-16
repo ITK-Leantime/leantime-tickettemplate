@@ -17,14 +17,12 @@ bin/leantime plugin:install leantime/ticket-template
 bin/leantime plugin:enable leantime/ticket-template
 ```
 
-Alternatively, navigate to `/plugins/myapps` and activate the
-`leantime/ticket-template` plugin.
+Alternatively, navigate to `/plugins/myapps` and activate the `leantime/ticket-template` plugin.
 
 ## Usage
 
-Go to plugin settings (`/TicketTemplate/settings`),
-which requires at least administrator (40) role,
-to configure ticket templates.
+Go to plugin settings (`/TicketTemplate/settings`), which requires at least administrator (40) role, to configure ticket
+templates.
 
 ## Development
 
@@ -94,6 +92,6 @@ docker compose build && docker compose run --rm php bin/create-release dev-test
 
 ## Deploy
 
-The deploy script downloads a [release](https://github.com/ITK-Leantime/leantime-tickettemplate/releases) from Github and
-unzips it. The script should be passed a tag as argument. In the process the script deletes itself, but the script
+The deploy script downloads a [release](https://github.com/ITK-Leantime/leantime-tickettemplate/releases) from Github
+and unzips it. The script should be passed a tag as argument. In the process the script deletes itself, but the script
 finishes because it [is still in memory](https://linux.die.net/man/3/unlink).
