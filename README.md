@@ -17,33 +17,81 @@ bin/leantime plugin:install leantime/ticket-template
 bin/leantime plugin:enable leantime/ticket-template
 ```
 
-Alternatively, navigate to `/plugins/myapps` and activate the
-`leantime/ticket-template` plugin.
+Alternatively, navigate to `/plugins/myapps` and activate the `leantime/ticket-template` plugin.
 
 ## Usage
 
-Go to plugin settings (`/TicketTemplate/settings`),
-which requires at least administrator (40) role,
-to configure ticket templates.
+Go to plugin settings (`/TicketTemplate/settings`), which requires at least administrator (40) role, to configure ticket
+templates.
 
 ## Development
 
-### Coding standards
+Run composer install
 
-``` shell
-docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer install
-docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer coding-standards-apply
-docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer coding-standards-check
+```shell name=development-install
+docker run --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer install
 ```
 
-```shell
-docker run --rm --volume $PWD:/md peterdavehello/markdownlint markdownlint --ignore vendor --ignore node_modules --ignore LICENSE.md '**/*.md' --fix
-docker run --rm --volume $PWD:/md peterdavehello/markdownlint markdownlint --ignore vendor --ignore node_modules --ignore LICENSE.md '**/*.md'
+### Composer normalize
+
+```shell name=composer-normalize
+docker run --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer normalize
+```
+
+### Coding standards
+
+#### Check and apply with phpcs
+
+```shell name=check-coding-standards
+docker run --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer coding-standards-check
+```
+
+```shell name=apply-coding-standards
+docker run --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer coding-standards-apply
+```
+
+#### Check and apply with prettier
+
+```shell name=prettier-check
+docker run --rm -v "$(pwd):/work" tmknom/prettier:latest --check assets
+```
+
+```shell name=prettier-apply
+docker run --rm -v "$(pwd):/work" tmknom/prettier:latest --write assets
+```
+
+#### Check and apply markdownlint
+
+```shell name=markdown-check
+docker run --rm --volume $PWD:/md peterdavehello/markdownlint markdownlint --ignore vendor --ignore LICENSE.md '**/*.md'
+```
+
+```shell name=markdown-apply
+docker run --rm --volume $PWD:/md peterdavehello/markdownlint markdownlint --ignore vendor --ignore LICENSE.md '**/*.md' --fix
+```
+
+#### Check with shellcheck
+
+```shell name=shell-check
+docker run --rm --volume "$PWD:/app" --workdir /app peterdavehello/shellcheck shellcheck bin/create-release
+docker run --rm --volume "$PWD:/app" --workdir /app peterdavehello/shellcheck shellcheck bin/deploy
+docker run --rm --volume "$PWD:/app" --workdir /app peterdavehello/shellcheck shellcheck bin/local.create-release
 ```
 
 ### Code analysis
 
-```shell
-docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer install
-docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer code-analysis
+```shell name=code-analysis
+docker run --interactive --rm --volume ${PWD}:/app itkdev/php8.3-fpm:latest composer code-analysis
 ```
+
+## Test release build
+
+```shell name=test-create-release
+docker compose build && docker compose run --rm php bin/create-release dev-test
+```
+
+## Deploy
+
+The deploy script downloads a [release](https://github.com/ITK-Leantime/leantime-tickettemplate/releases) from Github
+and unzips it. The script should be passed a tag as argument. In the process the script deletes itself, but the script
+finishes because it [is still in memory](https://linux.die.net/man/3/unlink).
