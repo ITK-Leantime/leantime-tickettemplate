@@ -1,7 +1,7 @@
 {
     "name": "leantime/ticket-template",
     "description": "Allows setting ticket template on projects",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "authors": [
         {
             "name": "Jeppe Kuhlmann Andersen",
