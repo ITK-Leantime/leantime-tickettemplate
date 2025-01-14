@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2025-01-14
+
 * [PR-8](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/8)
   * Added compatibility for leantime 3.3.x
 
@@ -35,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * [PR-1](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/1)
   * Initial plugin that adds ability to configure a default ticket template per project
 
-[Unreleased]: https://github.com/ITK-Leantime/leantime-tickettemplate/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/ITK-Leantime/leantime-tickettemplate/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/ITK-Leantime/leantime-tickettemplate/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/ITK-Leantime/leantime-tickettemplate/compare/v0.0.1...1.0.0
 [0.0.1]: https://github.com/ITK-Leantime/leantime-tickettemplate/releases/tag/v0.0.1
