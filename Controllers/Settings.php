@@ -60,7 +60,6 @@ class Settings extends Controller
         // Also note that the default 'max_input_vars' is 1000,
         // hence this will fail if more than 1000 projects exists.
         if (count($projects) != count($postedProjects)) {
-
             $this->tpl->setNotification('Failed saving settings', 'error');
         } else {
             // Do the updating if change detected.
