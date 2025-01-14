@@ -1,6 +1,8 @@
 {
     "name": "leantime/ticket-template",
     "description": "Allows setting ticket template on projects",
+    "license": "MIT",
+    "type": "leantime-plugin",
     "version": "1.0.1",
     "authors": [
         {
@@ -8,58 +10,59 @@
             "email": "jekua@aarhus.dk"
         }
     ],
-    "type": "leantime-plugin",
-    "license": "MIT",
     "homepage": "https://github.com/ITK-Leantime/leantime-tickettemplate",
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^3.9",
-        "leantime/leantime": "^3.2",
-        "friendsofphp/php-cs-fixer": "^3.51",
-        "phpcsstandards/phpcsextra": "^1.2",
-        "zebra-north/phpcs-short-types": "^1.0",
-        "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^10.5"
+    "require": {
+        "ergebnis/composer-normalize": "^2.43"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.51",
+        "leantime/leantime": "^3.2",
+        "phpcsstandards/phpcsextra": "^1.2",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.5",
+        "squizlabs/php_codesniffer": "^3.9",
+        "zebra-north/phpcs-short-types": "^1.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://rimi-itk.github.io/composer/"
+        }
+    ],
     "autoload": {
         "psr-4": {
-            "Leantime\\Plugins\\Fixtures\\": ["./", "tests/"]
+            "Leantime\\Plugins\\Fixtures\\": [
+                "./",
+                "tests/"
+            ]
         }
     },
     "config": {
         "allow-plugins": {
-            "metasyntactical/composer-plugin-license-check": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "php-http/discovery": true,
-            "ergebnis/composer-normalize": true
+            "ergebnis/composer-normalize": true,
+            "metasyntactical/composer-plugin-license-check": true,
+            "php-http/discovery": true
         }
     },
     "scripts": {
         "code-analysis": [
-          "@code-analysis/phpstan"
+            "@code-analysis/phpstan"
         ],
         "code-analysis/phpstan": [
-          "phpstan analyse"
+            "phpstan analyse"
         ],
         "coding-standards-apply": [
-          "@coding-standards-apply/phpcbf"
+            "@coding-standards-apply/phpcbf"
         ],
         "coding-standards-apply/phpcbf": [
-          "phpcbf ."
+            "phpcbf ."
         ],
         "coding-standards-check": [
-          "@coding-standards-check/phpcs"
+            "@coding-standards-check/phpcs"
         ],
         "coding-standards-check/phpcs": [
-          "phpcs ."
+            "phpcs ."
         ]
-      },
-    "repositories": [
-        {
-          "type": "composer",
-          "url": "https://rimi-itk.github.io/composer/"
-        }
-      ],
-    "require": {
-        "ergebnis/composer-normalize": "^2.43"
     }
 }
