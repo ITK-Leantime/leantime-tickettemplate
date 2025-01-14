@@ -42,7 +42,7 @@
                                         @php
                                             $noDefault = $tpl->get('noDefault')
                                         @endphp
-                                        <select name="{{$project['projectId']}}">
+                                        <select name="projects[{{ $project['projectId'] }}]">
                                             <option label="{{ $noDefault }}">{{ $noDefault }}</option>
                                             @foreach($tpl->get('templates') as $template)
                                                 <option value="{{ $template['id']}}"

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* [PR-8](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/8)
+  * Added compatibility for leantime 3.3.x
+
 ## [1.0.0] - 2024-09-18
 
 ## [0.0.1] - 2024-09-17

@@ -54,17 +54,18 @@ class Settings extends Controller
 
         $ticketTemplateRepository = app()->make(TicketTemplateRepository::class);
         $projects = $ticketTemplateRepository->getAllAvailableProjects();
+        $postedProjects = $params['projects'];
 
         // We should receive a param per project.
         // Also note that the default 'max_input_vars' is 1000,
         // hence this will fail if more than 1000 projects exists.
-        if (count($projects) != count($params)) {
+        if (count($projects) !== count($postedProjects)) {
             $this->tpl->setNotification('Failed saving settings', 'error');
         } else {
             // Do the updating if change detected.
             foreach ($projects as $project) {
                 $projectId = $project['projectId'];
-                $compareValue = $params[$projectId] === self::NO_DEFAULT ? null : $params[$projectId];
+                $compareValue = $postedProjects[$projectId] === self::NO_DEFAULT ? null : $postedProjects[$projectId];
                 if ($project['templateId'] != $compareValue) {
                     $ticketTemplateRepository->handleTemplateProjectRelation($compareValue, $projectId);
                 }
