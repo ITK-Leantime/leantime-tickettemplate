@@ -70,7 +70,6 @@ docker run --rm --volume "$PWD:/md" itkdev/markdownlint '**/*.md'
 docker run --rm --volume "$PWD:/md" itkdev/markdownlint '**/*.md' --fix
 ```
 
-
 #### Check with shellcheck
 
 ```shell name=shell-check
