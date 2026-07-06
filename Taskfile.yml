@@ -44,9 +44,9 @@ tasks:
         vars:
           CLI_ARGS: run --rm php composer coding-standards-check
       - docker run --rm --volume "$(pwd):/md" itkdev/markdownlint '**/*.md'
-      - docker run --rm --volume "$(pwd):/app" --workdir /app peterdavehello/shellcheck shellcheck bin/create-release
-      - docker run --rm --volume "$(pwd):/app" --workdir /app peterdavehello/shellcheck shellcheck bin/deploy
-      - docker run --rm --volume "$(pwd):/app" --workdir /app peterdavehello/shellcheck shellcheck bin/local.create-release
+      - docker run --rm --volume "$(pwd):/app" --workdir /app peterdavehello/shellcheck shellcheck --external-sources --source-path=SCRIPTDIR bin/create-release
+      - docker run --rm --volume "$(pwd):/app" --workdir /app peterdavehello/shellcheck shellcheck --external-sources --source-path=SCRIPTDIR bin/deploy
+      - docker run --rm --volume "$(pwd):/app" --workdir /app peterdavehello/shellcheck shellcheck --external-sources --source-path=SCRIPTDIR bin/local.create-release
 
   coding-standards:apply:
     desc: Apply all coding standards fixes
