@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* [PR-12](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/12)
+  * Migrate repository data access from raw PDO to the query builder.
 * [PR-11](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/11)
   * Normalize scaffolding.
 * [PR-10](https://github.com/ITK-Leantime/leantime-tickettemplate/pull/10)
