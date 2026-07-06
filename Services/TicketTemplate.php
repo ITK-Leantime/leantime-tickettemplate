@@ -68,7 +68,10 @@ class TicketTemplate
 
             $template = reset($templates);
 
-            $ticket->description = $template['content'];
+            // Ticket descriptions render as HTML (TinyMCE), but the template is
+            // authored in a plain textarea. Convert its newlines to <br>,
+            // otherwise the line breaks collapse when the description displays.
+            $ticket->description = nl2br((string) $template['content']);
         }
     }
 }
