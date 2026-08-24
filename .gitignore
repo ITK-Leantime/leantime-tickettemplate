@@ -3,3 +3,9 @@ vendor
 node_modules
 yarn.lock
 composer.lock
+.DS_Store
+
+# Release artifacts
+release/
+checksum.txt
+*.tar.gz
